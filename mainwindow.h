@@ -15,6 +15,12 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+
+    void on_pushButton1Player_clicked();
+
+    void on_stackedWidget_currentChanged(int arg1);
+
 private:
     Ui::MainWindow *ui;
 };
