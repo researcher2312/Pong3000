@@ -1,8 +1,9 @@
 #include <QGraphicsScene>
-#include <QGraphicsRectItem>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "Paddle.h"
+#include "Ball.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -10,9 +11,17 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     QGraphicsScene *scene = new QGraphicsScene();
-    QGraphicsRectItem *ball = new QGraphicsRectItem(0, 0, 100, 100);
+    Paddle* paddle = new Paddle();
+    paddle->setRect(0, 0, 20, 300);
+    scene->addItem(paddle);
+    paddle->setFlag(QGraphicsItem::ItemIsFocusable);
+    paddle->setFocus();
+    Ball* ball = new Ball();
+    ball->setPos(20, 20);
     scene->addItem(ball);
     ui->graphicsView->setScene(scene);
+    ui->graphicsView->setFixedSize(800, 600);
+    scene->setSceneRect(0,0, 800, 600);
 }
 
 MainWindow::~MainWindow()
