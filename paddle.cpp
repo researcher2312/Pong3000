@@ -3,11 +3,13 @@
 #include <QFont>
 #include "paddle.h"
 
-
-Paddle::Paddle(int x, int y)
+Paddle::Paddle(int x, int y, Score* new_score, QGraphicsItem* parent):
+    QGraphicsRectItem(parent)
 {
     setRect(x, y, 20, 300);
+    score = new_score;
 }
+
 void Paddle::keyPressEvent(QKeyEvent *event)
 {
     if (event->key() == Qt::Key_Up){
@@ -19,3 +21,4 @@ void Paddle::keyPressEvent(QKeyEvent *event)
             setPos(x(), y()+10);
     }
 }
+
