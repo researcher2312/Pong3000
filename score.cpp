@@ -20,6 +20,7 @@ void Score::update()
 void Score::increase()
 {
     ++score;
+    update();
 }
 
 int Score::getScore()const

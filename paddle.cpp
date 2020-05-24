@@ -6,7 +6,8 @@
 Paddle::Paddle(int x, int y, Score* new_score, QGraphicsItem* parent):
     QGraphicsRectItem(parent)
 {
-    setRect(x, y, 20, 300);
+    setRect(0, 0, 20, 300);
+    setPos(x, y);
     score = new_score;
 }
 

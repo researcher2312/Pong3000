@@ -1,12 +1,12 @@
 #include <QGraphicsScene>
 #include <QList>
+#include <QRandomGenerator>
 #include "ball.h"
-#include "paddle.h"
 
-Ball::Ball(int x, int y, int speed_x, int speed_y):
-    speed_x(speed_x), speed_y(speed_y)
+
+Ball::Ball()
 {
-    setRect(x,y,50,50);
+    setRect(0,0,50,50);
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
     timer->start(25);
@@ -27,7 +27,7 @@ bool Ball::detectWallCollision()
         return true;
     }
     if(x() <= 0 || x() >= scene()->width()-rect().width()){
-        speed_x = -speed_x;
+        emit ballOut();
         return true;
     }
     return false;
@@ -43,4 +43,22 @@ bool Ball::detectPaddleColision()
         }
     }
     return false;
+}
+
+void Ball::initRandomSpeed()
+{
+    speed_x = QRandomGenerator::securelySeeded().bounded(5, 7);
+    speed_y = QRandomGenerator::securelySeeded().bounded(5, 7);
+}
+
+void Ball::initRandomCoords()
+{
+    int rand = QRandomGenerator::system()->bounded(55, scene()->height()-55);
+    setPos(scene()->width()/2, rand);
+}
+
+void Ball::initRandomStart()
+{
+    initRandomSpeed();
+    initRandomCoords();
 }

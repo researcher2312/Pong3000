@@ -5,7 +5,10 @@
 #include <QObject>
 #include <QTimer>
 
-class Ball: public QObject, public QGraphicsRectItem{
+#include "paddle.h"
+
+class Ball: public QObject, public QGraphicsRectItem
+{
     Q_OBJECT
 private:
     QTimer* timer;
@@ -13,10 +16,15 @@ private:
     int speed_y;
     bool detectWallCollision();
     bool detectPaddleColision();
+    void initRandomSpeed();
+    void initRandomCoords();
 public:
-    Ball(int x=0, int y=0, int speed_x=5, int speed_y=5);
+    Ball();
+    void initRandomStart();
 public slots:
     void move();
+signals:
+    void ballOut();
 };
 
 #endif // BALL_H
