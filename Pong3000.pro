@@ -16,15 +16,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    Ball.cpp \
-    Paddle.cpp \
+    ball.cpp \
+    game.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    paddle.cpp \
+    score.cpp
 
 HEADERS += \
-    Ball.h \
-    Paddle.h \
-    mainwindow.h
+    ball.h \
+    game.h \
+    mainwindow.h \
+    paddle.h \
+    score.h
 
 FORMS += \
     mainwindow.ui

@@ -1,6 +1,7 @@
 #include <QKeyEvent>
 #include <QGraphicsScene>
-#include "Paddle.h"
+#include <QFont>
+#include "paddle.h"
 
 
 Paddle::Paddle(int x, int y)

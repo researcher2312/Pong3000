@@ -1,15 +1,15 @@
 #include <QGraphicsScene>
 #include <QList>
-#include "Ball.h"
-#include "Paddle.h"
+#include "ball.h"
+#include "paddle.h"
 
 Ball::Ball(int x, int y, int speed_x, int speed_y):
     speed_x(speed_x), speed_y(speed_y)
 {
     setRect(x,y,50,50);
-    timer = new QTimer();
+    timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
-    timer->start(50);
+    timer->start(25);
 }
 
 void Ball::move()
