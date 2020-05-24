@@ -6,7 +6,7 @@
 
 Ball::Ball()
 {
-    setRect(0,0,50,50);
+    setRect(0,0,25,25);
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
     timer->start(25);
