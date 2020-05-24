@@ -2,6 +2,7 @@
 #define GAME_H
 
 #include <QGraphicsScene>
+#include <QObject>
 #include <QWidget>
 
 #include "ball.h"
@@ -10,6 +11,7 @@
 
 class Game: public QGraphicsScene
 {
+    Q_OBJECT
 public:
     Game(QWidget* parent=nullptr);
     Paddle* player1;
@@ -17,6 +19,8 @@ public:
     Ball* ball;
     Score* score1;
     Score* score2;
+public slots:
+    void resetBall();
 };
 
 #endif // GAME_H
