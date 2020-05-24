@@ -1,6 +1,7 @@
 #include <QGraphicsScene>
 #include <QList>
 #include "Ball.h"
+#include "Paddle.h"
 
 Ball::Ball(int x, int y, int speed_x, int speed_y):
     speed_x(speed_x), speed_y(speed_y)

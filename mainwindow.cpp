@@ -11,8 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     QGraphicsScene *scene = new QGraphicsScene();
-    Paddle* paddle = new Paddle();
-    paddle->setRect(0, 0, 20, 300);
+    Paddle* paddle = new Paddle(0, scene->height()/2);
     scene->addItem(paddle);
     paddle->setFlag(QGraphicsItem::ItemIsFocusable);
     paddle->setFocus();

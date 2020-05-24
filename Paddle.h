@@ -6,6 +6,7 @@
 class Paddle: public QGraphicsRectItem
 {
 public:
+    Paddle(int x, int y);
     void keyPressEvent(QKeyEvent* event);
 };
 
