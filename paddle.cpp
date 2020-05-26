@@ -12,10 +12,10 @@ Paddle::Paddle(int x, int y, Score* new_score, QGraphicsItem* parent):
 
 void Paddle::moveUp(){
     if (y()>0)
-        setPos(x(), y()-10);
+        setPos(x(), y()-20);
 }
 
 void Paddle::moveDown(){
     if (y()+rect().height() < scene()->height())
-        setPos(x(), y()+10);
+        setPos(x(), y()+20);
 }

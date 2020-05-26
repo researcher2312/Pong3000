@@ -2,25 +2,28 @@
 #include "game.h"
 
 
-Game::Game(QWidget* parent):
+Game::Game(QString port_name, QWidget* parent):
     QGraphicsView(parent)
 {
+    port = new QSerialPort(port_name, this);
+    port->setBaudRate(9600);
     setFocusPolicy(Qt::StrongFocus);
     setFocus();
     scene = new QGraphicsScene();
     setScene(scene);
-    setFixedSize(808, 606);
     scene->setSceneRect(0,0, 800, 600);
-    score1 = new Score(50, 10);
-    score2 = new Score(420, 10);
-    player1 = new Paddle(50, height()/2-150, score1);
-    player2 = new Paddle(730, height()/2-150, score2);
+    score1 = new Score(340, 10);
+    score2 = new Score(450, 10);
+    player1 = new Paddle(50, scene->height()/2-150, score1);
+    player2 = new Paddle(730, scene->height()/2-150, score2);
     ball = new Ball();
+    central_line = new QGraphicsLineItem(400, 0, 400, 600);
     scene->addItem(ball);
     scene->addItem(player1);
     scene->addItem(player2);
     scene->addItem(score1);
     scene->addItem(score2);
+    scene->addItem(central_line);
     ball->initRandomStart();
     connect(ball, SIGNAL(ballOut()), this, SLOT(resetBall()));
     connect(this, SIGNAL(moveUp1()), player1, SLOT(moveUp()));

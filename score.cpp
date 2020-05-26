@@ -7,7 +7,7 @@
 Score::Score(int x, int y, QGraphicsItem* parent):
     QGraphicsSimpleTextItem(parent)
 {
-    setFont(QFont("times", 16));
+    setFont(QFont("bitwise", 25));
     setPos(x, y);
     update();
 }
