@@ -2,7 +2,9 @@
 #define GAME_H
 
 #include <QGraphicsScene>
+#include <QGraphicsLineItem>
 #include <QGraphicsView>
+#include <QSerialPort>
 #include <QObject>
 #include <QWidget>
 
@@ -15,7 +17,9 @@ class Game: public QGraphicsView
     Q_OBJECT
 public:
     void keyPressEvent(QKeyEvent *event);
-    Game(QWidget* parent=nullptr);
+    Game(QString, QWidget* parent=nullptr);
+    QGraphicsLineItem* central_line;
+    QSerialPort* port;
     QGraphicsScene* scene;
     Paddle* player1;
     Paddle* player2;
