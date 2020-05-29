@@ -24,8 +24,14 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton1Player_clicked()
 {
-    KeyboardPlayedGame* game = new KeyboardPlayedGame(this);
+    Game* game;
+    if(ui->comboBoxDevices->count() == 0) {
+        game = new KeyboardPlayedGame(this);
+    }
+    else {
+        game = new USBPlayedGame(ui->comboBoxDevices->currentText(), this);
+    }
+
     ui->stackedWidget->insertWidget(2, game);
     ui->stackedWidget->setCurrentIndex(2);
 }
-//ui->comboBoxDevices->currentText()

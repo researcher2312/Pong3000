@@ -28,6 +28,7 @@ USBPlayedGame::USBPlayedGame(QString port_name, QWidget* parent)
 {
     device = new QSerialPort(port_name, this);
     setupSerialPort();
+    connect(device, SIGNAL(readyRead()), this, SLOT(readFromPort()));
 }
 
 KeyboardPlayedGame::KeyboardPlayedGame(QWidget* parent)
@@ -35,10 +36,6 @@ KeyboardPlayedGame::KeyboardPlayedGame(QWidget* parent)
 {
     setFocusPolicy(Qt::StrongFocus);
     setFocus();
-    connect(this, SIGNAL(moveUp1()), player1, SLOT(moveUp()));
-    connect(this, SIGNAL(moveUp2()), player2, SLOT(moveUp()));
-    connect(this, SIGNAL(moveDown1()), player1, SLOT(moveDown()));
-    connect(this, SIGNAL(moveDown2()), player2, SLOT(moveDown()));
 }
 
 void Game::resetBall()
@@ -56,28 +53,49 @@ void KeyboardPlayedGame::keyPressEvent(QKeyEvent *event)
 {
     switch(event->key()){
     case (Qt::Key_Up):
-        emit moveUp2();
+        player2->moveRelative(-10);
         break;
     case (Qt::Key_Down):
-        emit moveDown2();
+        player2->moveRelative(10);
         break;
     case (Qt::Key_W):
-        emit moveUp1();
+        player1->moveRelative(-10);
         break;
     case (Qt::Key_S):
-        emit moveDown1();
+        player1->moveRelative(10);
         break;
     }
 }
 
 void USBPlayedGame::setupSerialPort()
 {
-    if(device->open(QSerialPort::ReadWrite))
-    {
-      this->device->setBaudRate(QSerialPort::Baud9600);
-      this->device->setDataBits(QSerialPort::Data8);
-      this->device->setParity(QSerialPort::NoParity);
-      this->device->setStopBits(QSerialPort::OneStop);
-      this->device->setFlowControl(QSerialPort::NoFlowControl);
+
+    if(!device->isOpen()){
+        if(device->open(QSerialPort::ReadWrite)){
+            this->device->setBaudRate(QSerialPort::Baud9600);
+            this->device->setDataBits(QSerialPort::Data8);
+            this->device->setParity(QSerialPort::NoParity);
+            this->device->setStopBits(QSerialPort::OneStop);
+            this->device->setFlowControl(QSerialPort::NoFlowControl);
+        }
     }
+}
+
+int USBPlayedGame::normalizeInBounds(int var)
+{
+    int i = (var-10)*(scene->height()-player1->rect().height())/40;
+    return i;
+}
+
+void USBPlayedGame::readFromPort() {
+  while(device->canReadLine()) {
+    QString line = device->readLine();
+    line.remove("\r\n");
+    QStringList moveList = line.split(' ');
+    if (moveList.size() == 2){
+        player2->moveAbsolute(normalizeInBounds(moveList.at(0).toInt()));
+        player1->moveAbsolute(normalizeInBounds(moveList.at(1).toInt()));
+    }
+        //qDebug() << moveList.at(0) << ' ' << moveList.at(1);
+  }
 }

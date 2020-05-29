@@ -15,9 +15,8 @@ private:
     Score* score;
 public:
     Paddle(int x, int y, Score* new_score, QGraphicsItem* parent = nullptr);
-public slots:
-    void moveUp();
-    void moveDown();
+    void moveAbsolute(int);
+    void moveRelative(int);
 };
 
 #endif // PADDLE_H

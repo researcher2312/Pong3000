@@ -20,9 +20,9 @@ public:
 protected:
     Paddle* player1;
     Paddle* player2;
+    QGraphicsScene* scene;
 private:
     QGraphicsLineItem* central_line;
-    QGraphicsScene* scene;
     Ball* ball;
     Score* score1;
     Score* score2;
@@ -37,20 +37,19 @@ public:
     KeyboardPlayedGame(QWidget* parent=nullptr);
 private:
     void keyPressEvent(QKeyEvent *event);
-signals:
-    void moveUp1();
-    void moveUp2();
-    void moveDown1();
-    void moveDown2();
 };
 
 class USBPlayedGame: public Game
 {
+    Q_OBJECT
 public:
     USBPlayedGame(QString, QWidget* parent=nullptr);
 private:
+    int normalizeInBounds(int);
     void setupSerialPort();
     QSerialPort* device;
+private slots:
+    void readFromPort();
 };
 
 #endif // GAME_H
