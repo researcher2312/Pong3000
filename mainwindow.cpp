@@ -13,7 +13,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->comboBoxDevices->clear();
     const auto infos = QSerialPortInfo::availablePorts();
     for (const QSerialPortInfo &info : infos) {
-        ui->comboBoxDevices->addItem(info.portName()+ " " + info.description());
+        ui->comboBoxDevices->addItem(info.portName());
     }
 }
 
@@ -24,7 +24,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton1Player_clicked()
 {
-    Game* game = new Game(ui->comboBoxDevices->currentText(), this);
+    KeyboardPlayedGame* game = new KeyboardPlayedGame(this);
     ui->stackedWidget->insertWidget(2, game);
     ui->stackedWidget->setCurrentIndex(2);
 }
+//ui->comboBoxDevices->currentText()

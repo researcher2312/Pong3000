@@ -2,13 +2,9 @@
 #include "game.h"
 
 
-Game::Game(QString port_name, QWidget* parent):
-    QGraphicsView(parent)
+Game::Game(QWidget* parent)
+    :QGraphicsView(parent)
 {
-    port = new QSerialPort(port_name, this);
-    port->setBaudRate(9600);
-    setFocusPolicy(Qt::StrongFocus);
-    setFocus();
     scene = new QGraphicsScene();
     setScene(scene);
     scene->setSceneRect(0,0, 800, 600);
@@ -26,6 +22,19 @@ Game::Game(QString port_name, QWidget* parent):
     scene->addItem(central_line);
     ball->initRandomStart();
     connect(ball, SIGNAL(ballOut()), this, SLOT(resetBall()));
+}
+USBPlayedGame::USBPlayedGame(QString port_name, QWidget* parent)
+    :Game(parent)
+{
+    device = new QSerialPort(port_name, this);
+    setupSerialPort();
+}
+
+KeyboardPlayedGame::KeyboardPlayedGame(QWidget* parent)
+    :Game(parent)
+{
+    setFocusPolicy(Qt::StrongFocus);
+    setFocus();
     connect(this, SIGNAL(moveUp1()), player1, SLOT(moveUp()));
     connect(this, SIGNAL(moveUp2()), player2, SLOT(moveUp()));
     connect(this, SIGNAL(moveDown1()), player1, SLOT(moveDown()));
@@ -43,7 +52,8 @@ void Game::resetBall()
     ball->initRandomStart();
 }
 
-void Game::keyPressEvent(QKeyEvent *event){
+void KeyboardPlayedGame::keyPressEvent(QKeyEvent *event)
+{
     switch(event->key()){
     case (Qt::Key_Up):
         emit moveUp2();
@@ -57,5 +67,17 @@ void Game::keyPressEvent(QKeyEvent *event){
     case (Qt::Key_S):
         emit moveDown1();
         break;
+    }
+}
+
+void USBPlayedGame::setupSerialPort()
+{
+    if(device->open(QSerialPort::ReadWrite))
+    {
+      this->device->setBaudRate(QSerialPort::Baud9600);
+      this->device->setDataBits(QSerialPort::Data8);
+      this->device->setParity(QSerialPort::NoParity);
+      this->device->setStopBits(QSerialPort::OneStop);
+      this->device->setFlowControl(QSerialPort::NoFlowControl);
     }
 }
