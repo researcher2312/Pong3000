@@ -1,9 +1,13 @@
 #include <QGraphicsScene>
+#include <QDebug>
 #include <QList>
 #include <QRandomGenerator>
 #include "ball.h"
 
-
+int getRandomSign()
+{
+    return (2*QRandomGenerator::securelySeeded().bounded(0, 2))-1;
+}
 Ball::Ball()
 {
     setRect(0,0,25,25);
@@ -47,8 +51,8 @@ bool Ball::detectPaddleColision()
 
 void Ball::initRandomSpeed()
 {
-    speed_x = QRandomGenerator::securelySeeded().bounded(5, 7);
-    speed_y = QRandomGenerator::securelySeeded().bounded(5, 7);
+    speed_x = getRandomSign()*QRandomGenerator::securelySeeded().bounded(5, 7);
+    speed_y = getRandomSign()*QRandomGenerator::securelySeeded().bounded(5, 7);
 }
 
 void Ball::initRandomCoords()
