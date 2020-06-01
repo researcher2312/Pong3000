@@ -21,6 +21,12 @@ private slots:
 
     void on_pushButton1Player_clicked();
 
+    void on_pushButtonTest_clicked();
+
+    void on_pushButtonConnect_clicked();
+
+    void on_pushButtonDisconnect_clicked();
+
 private:
     Ui::MainWindow *ui;
     SerialConnector* device;
