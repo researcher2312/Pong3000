@@ -1,6 +1,6 @@
 QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets serialport
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets serialport charts
 
 CONFIG += c++11
 
@@ -21,14 +21,16 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     paddle.cpp \
-    score.cpp
+    score.cpp \
+    serialconnector.cpp
 
 HEADERS += \
     ball.h \
     game.h \
     mainwindow.h \
     paddle.h \
-    score.h
+    score.h \
+    serialconnector.h
 
 FORMS += \
     mainwindow.ui

@@ -9,12 +9,9 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
+    device = new SerialConnector(this);
     ui->setupUi(this);
     ui->comboBoxDevices->clear();
-    const auto infos = QSerialPortInfo::availablePorts();
-    for (const QSerialPortInfo &info : infos) {
-        ui->comboBoxDevices->addItem(info.portName());
-    }
 }
 
 MainWindow::~MainWindow()

@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 
+#include "serialconnector.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -21,5 +23,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    SerialConnector* device;
 };
 #endif // MAINWINDOW_H

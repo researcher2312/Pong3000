@@ -4,13 +4,14 @@
 #include <QGraphicsScene>
 #include <QGraphicsLineItem>
 #include <QGraphicsView>
-#include <QSerialPort>
+
 #include <QObject>
 #include <QWidget>
 
 #include "ball.h"
 #include "paddle.h"
 #include "score.h"
+#include "serialconnector.h"
 
 class Game: public QGraphicsView
 {
@@ -43,13 +44,12 @@ class USBPlayedGame: public Game
 {
     Q_OBJECT
 public:
-    USBPlayedGame(QString, QWidget* parent=nullptr);
+    USBPlayedGame(SerialConnector*, QWidget* parent=nullptr);
 private:
     int normalizeInBounds(int);
-    void setupSerialPort();
-    QSerialPort* device;
+    SerialConnector* device;
 private slots:
-    void readFromPort();
+    void movePlayers(QVector<int>);
 };
 
 #endif // GAME_H

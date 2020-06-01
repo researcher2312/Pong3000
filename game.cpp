@@ -23,12 +23,11 @@ Game::Game(QWidget* parent)
     ball->initRandomStart();
     connect(ball, SIGNAL(ballOut()), this, SLOT(resetBall()));
 }
-USBPlayedGame::USBPlayedGame(QString port_name, QWidget* parent)
-    :Game(parent)
+
+USBPlayedGame::USBPlayedGame(SerialConnector* serial, QWidget* parent)
+    :Game(parent), device(serial)
 {
-    device = new QSerialPort(port_name, this);
-    setupSerialPort();
-    connect(device, SIGNAL(readyRead()), this, SLOT(readFromPort()));
+    connect(device, SIGNAL(newData(QVector<int>)), this, SLOT(movePlayers(QVector<int>)));
 }
 
 KeyboardPlayedGame::KeyboardPlayedGame(QWidget* parent)
@@ -67,35 +66,16 @@ void KeyboardPlayedGame::keyPressEvent(QKeyEvent *event)
     }
 }
 
-void USBPlayedGame::setupSerialPort()
-{
-
-    if(!device->isOpen()){
-        if(device->open(QSerialPort::ReadWrite)){
-            this->device->setBaudRate(QSerialPort::Baud9600);
-            this->device->setDataBits(QSerialPort::Data8);
-            this->device->setParity(QSerialPort::NoParity);
-            this->device->setStopBits(QSerialPort::OneStop);
-            this->device->setFlowControl(QSerialPort::NoFlowControl);
-        }
-    }
-}
-
 int USBPlayedGame::normalizeInBounds(int var)
 {
     int i = (var-10)*(scene->height()-player1->rect().height())/40;
     return i;
 }
 
-void USBPlayedGame::readFromPort() {
-  while(device->canReadLine()) {
-    QString line = device->readLine();
-    line.remove("\r\n");
-    QStringList moveList = line.split(' ');
-    if (moveList.size() == 2){
-        player2->moveAbsolute(normalizeInBounds(moveList.at(0).toInt()));
-        player1->moveAbsolute(normalizeInBounds(moveList.at(1).toInt()));
-    }
-        //qDebug() << moveList.at(0) << ' ' << moveList.at(1);
-  }
+void USBPlayedGame::movePlayers(QVector<int> move)
+{
+    player1->moveAbsolute(normalizeInBounds(move.at(0)));
+    player2->moveAbsolute(normalizeInBounds(move.at(1)));
 }
+
+
