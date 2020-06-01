@@ -1,9 +1,11 @@
 #include <QGraphicsScene>
 #include <QSerialPortInfo>
+#include <QChartView>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "game.h"
+#include "chart.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
