@@ -42,8 +42,10 @@ bool Ball::detectPaddleColision()
     QList<QGraphicsItem*> colliding_items = collidingItems();
     for (auto& tested: colliding_items){
         if (typeid (*tested) == typeid (Paddle)){
-            speed_x = -speed_x;
-            return true;
+            if ((speed_x > 0 && x() < tested->x()) or (speed_x < 0 && x() > tested->x())){
+                speed_x = -speed_x;
+                return true;
+            }
         }
     }
     return false;

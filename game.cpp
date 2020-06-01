@@ -1,3 +1,4 @@
+#include <QDebug>
 #include <QKeyEvent>
 #include "game.h"
 
