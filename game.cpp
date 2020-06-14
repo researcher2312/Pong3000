@@ -1,7 +1,10 @@
 #include <QDebug>
 #include <QKeyEvent>
+#include <QMessageBox>
 #include "game.h"
 
+
+constexpr int POINTS_ENDING_ROUND= 2;
 
 Game::Game(bool isPlayedWithComputer, int difficulty_level, QWidget* parent)
     :QGraphicsView(parent), isPlayedWithComputer(isPlayedWithComputer), difficulty_level(difficulty_level)
@@ -50,6 +53,27 @@ void Game::resetBall()
     }
     else{
         score2->increase();
+    }
+    if (score1->getScore() == POINTS_ENDING_ROUND || score2->getScore() == POINTS_ENDING_ROUND){
+        if (score1->getScore() == POINTS_ENDING_ROUND){
+            points[0]++;
+            qDebug() << points[0];
+        }
+        if (score2->getScore() == POINTS_ENDING_ROUND){
+            points[1]++;
+            qDebug() << points[0];
+        }
+        if (points[0] == 2 || points[1] == 2){
+            QMessageBox msgBox;
+            msgBox.setText("Koniec gry");
+            msgBox.exec();
+            delete this;
+        }
+        QMessageBox msgBox;
+        score1->resetScore();
+        score2->resetScore();
+        msgBox.setText("Zmiana połów");
+        msgBox.exec();
     }
     ball->initRandomStart();
 }

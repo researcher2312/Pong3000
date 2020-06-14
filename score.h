@@ -12,6 +12,7 @@ public:
     Score(int, int, QGraphicsItem* parent = nullptr);
     void increase();
     int getScore()const;
+    void resetScore();
 };
 
 #endif // SCORE_H

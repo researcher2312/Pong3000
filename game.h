@@ -30,6 +30,7 @@ private:
     Score* score1;
     Score* score2;
     QTimer *botTimer;
+    int points[2] = {0};
 public slots:
     void resetBall();
     void moveBotPlayer();

@@ -27,3 +27,9 @@ int Score::getScore()const
 {
     return score;
 }
+
+void Score::resetScore()
+{
+    score = 0;
+    update();
+}
