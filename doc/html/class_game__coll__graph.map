@@ -1,0 +1,7 @@
+<map id="Game" name="Game">
+<area shape="rect" id="node1" title="Podstawowy interfejs do uruchomienia gry." alt="" coords="72,185,129,212"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,81,119,108"/>
+<area shape="rect" id="node3" href="$class_paddle.html" title="Klasa odpowiedzialna za przedstawienie graficzne i wygląd paletki gracza." alt="" coords="143,81,205,108"/>
+<area shape="rect" id="node4" title=" " alt="" coords="75,5,145,32"/>
+<area shape="rect" id="node5" title=" " alt="" coords="169,5,307,32"/>
+</map>

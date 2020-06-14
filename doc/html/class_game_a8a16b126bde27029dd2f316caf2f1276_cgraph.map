@@ -1,0 +1,4 @@
+<map id="Game::moveBotPlayer" name="Game::moveBotPlayer">
+<area shape="rect" id="node1" title="Porusza paletką bota." alt="" coords="5,5,157,32"/>
+<area shape="rect" id="node2" href="$class_paddle.html#a7ab458c5003670364e604aeae1996821" title="przenosi paletkę o wskazaną odległość od obecnego miejsca" alt="" coords="205,5,352,32"/>
+</map>

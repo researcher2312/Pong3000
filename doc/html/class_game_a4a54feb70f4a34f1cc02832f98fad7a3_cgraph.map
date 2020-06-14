@@ -1,0 +1,7 @@
+<map id="Game::resetBall" name="Game::resetBall">
+<area shape="rect" id="node1" title="Resetuje położenie piłki i nalicza punkty." alt="" coords="5,81,121,108"/>
+<area shape="rect" id="node2" href="$class_score.html#a0b481b4e3963090980301b2dbe2c3f95" title="zwraca obecny wynik punktowy" alt="" coords="185,5,301,32"/>
+<area shape="rect" id="node3" href="$class_score.html#ab5dbfab6935903c075509546878cfbda" title="zwiększa wartość przechowywanego licznika o 1" alt="" coords="186,56,299,83"/>
+<area shape="rect" id="node4" href="$class_ball.html#ac9355954261803dae69ec12a58a61845" title="funkcja resetująca położenie piłki" alt="" coords="169,107,316,133"/>
+<area shape="rect" id="node5" href="$class_score.html#ade936f4b478e9b5b5188e5232b6f1a0f" title="ustawia ilość punktów na 0" alt="" coords="179,157,306,184"/>
+</map>
