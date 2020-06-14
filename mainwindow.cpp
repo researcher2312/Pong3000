@@ -40,7 +40,6 @@ void MainWindow::on_pushButtonTest_clicked()
     QChartView *chartView = new QChartView(this);
     Chart *chart = new Chart(device, 0);
     chartView->setChart(chart);
-    chartView->setRenderHint(QPainter::Antialiasing);
 
     QChartView *chartView1 = new QChartView(this);
     Chart *chart1 = new Chart(device, 1);

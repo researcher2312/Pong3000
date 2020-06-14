@@ -12,6 +12,7 @@ Chart::Chart(SerialConnector* serial, int side, QGraphicsItem *parent, Qt::Windo
     m_y(1)
 {
     QObject::connect(device, SIGNAL(newData(QVector<int>)), this, SLOT(handleNewData(QVector<int>)));
+    QObject::connect(&m_timer, &QTimer::timeout, this, &Chart::handleTimeout);
 
     m_series = new QLineSeries(this);
     QPen blue(Qt::blue);
@@ -26,21 +27,30 @@ Chart::Chart(SerialConnector* serial, int side, QGraphicsItem *parent, Qt::Windo
     m_series->attachAxis(m_axisX);
     m_series->attachAxis(m_axisY);
 
-    m_axisX->setTickCount(5);
+    m_axisX->setTickCount(20);
     m_axisX->setRange(0, 10);
     m_axisY->setRange(0, 50);
 
-    setTitle("Zależność odległości zmierzonej od czasu");
     legend()->hide();
     setAnimationOptions(QChart::AllAnimations);
 
+    m_timer.setInterval(500);
     m_timer.start();
 }
 
-void Chart::handleNewData(QVector<int> data)
+void Chart::handleTimeout()
 {
-    m_series->append(qreal(m_timer.elapsed())/1000, data.at(m_chosen_side));
-//    scroll(m_timer.elapsed()/1000, 0);
+    qreal x = plotArea().width() / m_axisX->tickCount();
+    qreal y = (m_axisX->max() - m_axisX->min()) / m_axisX->tickCount();
+    m_x += y;
+    m_series->append(m_x, m_y);
+
+    scroll(x, 0);
+}
+
+void Chart::handleNewData(QVector<int> data)
+{  
+    m_y = data.at(m_chosen_side);
 }
 
 Chart::~Chart()

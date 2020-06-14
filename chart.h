@@ -17,9 +17,10 @@ public:
 
 public slots:
     void handleNewData(QVector<int> data);
+    void handleTimeout();
 private:
     SerialConnector* device;
-    QElapsedTimer m_timer;
+    QTimer m_timer;
     QLineSeries* m_series;
     int m_chosen_side;
     QValueAxis *m_axisX;
@@ -27,6 +28,7 @@ private:
     qreal m_step;
     qreal m_x;
     qreal m_y;
+
 };
 
 #endif // CHART_H
