@@ -3,8 +3,8 @@
 #include "game.h"
 
 
-Game::Game(QWidget* parent)
-    :QGraphicsView(parent)
+Game::Game(bool isPlayedWithComputer, int difficulty_level, QWidget* parent)
+    :QGraphicsView(parent), isPlayedWithComputer(isPlayedWithComputer), difficulty_level(difficulty_level)
 {
     scene = new QGraphicsScene();
     setScene(scene);
@@ -23,16 +23,21 @@ Game::Game(QWidget* parent)
     scene->addItem(central_line);
     ball->initRandomStart();
     connect(ball, SIGNAL(ballOut()), this, SLOT(resetBall()));
+    if (isPlayedWithComputer){
+        botTimer = new QTimer(this);
+        botTimer->start(20);
+        connect(botTimer, SIGNAL(timeout()), this, SLOT(moveBotPlayer()));
+    }
 }
 
-USBPlayedGame::USBPlayedGame(SerialConnector* serial, QWidget* parent)
-    :Game(parent), device(serial)
+USBPlayedGame::USBPlayedGame(SerialConnector* serial, QWidget* parent, bool isPlayedWithComputer, int difficulty_level)
+    :Game(isPlayedWithComputer, difficulty_level, parent), device(serial)
 {
     connect(device, SIGNAL(newData(QVector<int>)), this, SLOT(movePlayers(QVector<int>)));
 }
 
-KeyboardPlayedGame::KeyboardPlayedGame(QWidget* parent)
-    :Game(parent)
+KeyboardPlayedGame::KeyboardPlayedGame(QWidget* parent, bool isPlayedWithComputer, int difficulty_level)
+    :Game(isPlayedWithComputer, difficulty_level, parent)
 {
     setFocusPolicy(Qt::StrongFocus);
     setFocus();
@@ -52,17 +57,17 @@ void Game::resetBall()
 void KeyboardPlayedGame::keyPressEvent(QKeyEvent *event)
 {
     switch(event->key()){
-    case (Qt::Key_Up):
-        player2->moveRelative(-10);
-        break;
-    case (Qt::Key_Down):
-        player2->moveRelative(10);
-        break;
     case (Qt::Key_W):
         player1->moveRelative(-10);
         break;
     case (Qt::Key_S):
         player1->moveRelative(10);
+        break;
+    case (Qt::Key_Up):
+        player2->moveRelative(-10);
+        break;
+    case (Qt::Key_Down):
+        player2->moveRelative(10);
         break;
     }
 }
@@ -75,8 +80,17 @@ int USBPlayedGame::normalizeInBounds(int var)
 
 void USBPlayedGame::movePlayers(QVector<int> move)
 {
-    player1->moveAbsolute(normalizeInBounds(move.at(0)));
-    player2->moveAbsolute(normalizeInBounds(move.at(1)));
+    player1->moveAbsolute(normalizeInBounds(move.at(1)));
+    if (!isPlayedWithComputer){
+        player2->moveAbsolute(normalizeInBounds(move.at(0)));
+    }
 }
 
+void Game::moveBotPlayer()
+{
+    int difference = player2->y() - ball->y();
+    player2->moveRelative(-getSign(difference) * difficulty_level);
 
+}
+
+int getSign(int tested){return tested>0?1:-1;}

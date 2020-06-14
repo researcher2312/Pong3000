@@ -23,6 +23,29 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton1Player_clicked()
 {
+    int difficulty = 0;
+    auto difficulty_text = ui->comboBoxDifficulty->currentText();
+    if (difficulty_text == "Łatwy")
+        difficulty = 1;
+    else if (difficulty_text == "Średni")
+        difficulty = 3;
+    else if (difficulty_text == "Trudny")
+        difficulty = 5;
+
+    Game* game;
+    if(!device->isOpen()) {
+        game = new KeyboardPlayedGame(this, true, difficulty);
+    }
+    else {
+        game = new USBPlayedGame(device, this, true, difficulty);
+    }
+
+    ui->stackedWidget->insertWidget(2, game);
+    ui->stackedWidget->setCurrentIndex(2);
+}
+
+void MainWindow::on_pushButton2Player_clicked()
+{
     Game* game;
     if(!device->isOpen()) {
         game = new KeyboardPlayedGame(this);
@@ -34,6 +57,7 @@ void MainWindow::on_pushButton1Player_clicked()
     ui->stackedWidget->insertWidget(2, game);
     ui->stackedWidget->setCurrentIndex(2);
 }
+
 
 void MainWindow::on_pushButtonTest_clicked()
 {
