@@ -1,6 +1,6 @@
 QT       += core gui
 
-greaterThan(QT_MAJOR_VERSION, 4): QT += widgets serialport charts
+greaterThan(QT_MAJOR_VERSION, 4): QT += widgets serialport charts multimedia
 
 CONFIG += c++11
 

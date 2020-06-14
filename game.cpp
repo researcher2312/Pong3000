@@ -16,6 +16,8 @@ Game::Game(bool isPlayedWithComputer, int difficulty_level, QWidget* parent)
     score2 = new Score(450, 10);
     player1 = new Paddle(50, scene->height()/2-150, score1);
     player2 = new Paddle(730, scene->height()/2-150, score2);
+    label[0] = new QGraphicsSimpleTextItem;
+    label[1] = new QGraphicsSimpleTextItem;
     ball = new Ball();
     central_line = new QGraphicsLineItem(400, 0, 400, 600);
     scene->addItem(ball);
@@ -24,6 +26,8 @@ Game::Game(bool isPlayedWithComputer, int difficulty_level, QWidget* parent)
     scene->addItem(score1);
     scene->addItem(score2);
     scene->addItem(central_line);
+    scene->addItem(label[0]);
+    scene->addItem(label[1]);
     ball->initRandomStart();
     connect(ball, SIGNAL(ballOut()), this, SLOT(resetBall()));
     if (isPlayedWithComputer){
@@ -31,6 +35,17 @@ Game::Game(bool isPlayedWithComputer, int difficulty_level, QWidget* parent)
         botTimer->start(20);
         connect(botTimer, SIGNAL(timeout()), this, SLOT(moveBotPlayer()));
     }
+}
+
+void Game::setPlayersNames(QString name1, QString name2)
+{
+        label[0]->setFont(QFont("bitwise", 25));
+        label[0]->setText(name1);
+        label[0]->setPos(0, 20);
+
+        label[1]->setFont(QFont("bitwise", 25));
+        label[1]->setText(name2);
+        label[1]->setPos(750, 10);
 }
 
 USBPlayedGame::USBPlayedGame(SerialConnector* serial, QWidget* parent, bool isPlayedWithComputer, int difficulty_level)
@@ -57,11 +72,9 @@ void Game::resetBall()
     if (score1->getScore() == POINTS_ENDING_ROUND || score2->getScore() == POINTS_ENDING_ROUND){
         if (score1->getScore() == POINTS_ENDING_ROUND){
             points[0]++;
-            qDebug() << points[0];
         }
         if (score2->getScore() == POINTS_ENDING_ROUND){
             points[1]++;
-            qDebug() << points[0];
         }
         if (points[0] == 2 || points[1] == 2){
             QMessageBox msgBox;

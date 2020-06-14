@@ -4,6 +4,7 @@
 #include <QGraphicsScene>
 #include <QGraphicsLineItem>
 #include <QGraphicsView>
+#include <QGraphicsSimpleTextItem>
 
 #include <QObject>
 #include <QWidget>
@@ -18,6 +19,7 @@ class Game: public QGraphicsView
     Q_OBJECT
 public:
     Game(bool isPlayedWithComputer, int difficulty_level, QWidget* parent=nullptr);
+    void setPlayersNames(QString, QString);
 protected:
     Paddle* player1;
     Paddle* player2;
@@ -30,6 +32,7 @@ private:
     Score* score1;
     Score* score2;
     QTimer *botTimer;
+    QGraphicsSimpleTextItem *label[2];
     int points[2] = {0};
 public slots:
     void resetBall();

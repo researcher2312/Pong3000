@@ -40,6 +40,8 @@ void MainWindow::on_pushButton1Player_clicked()
         game = new USBPlayedGame(device, this, true, difficulty);
     }
 
+    game->setPlayersNames(ui->nameEdit->text(), ui->nameEdit2->text());
+
     ui->stackedWidget->insertWidget(2, game);
     ui->stackedWidget->setCurrentIndex(2);
 }
