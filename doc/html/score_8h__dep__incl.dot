@@ -1,0 +1,25 @@
+digraph "/media/dane/Politechnika/WDS/Pong3000/score.h"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="/media/dane/Politechnika\l/WDS/Pong3000/score.h",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 [label="/media/dane/Politechnika\l/WDS/Pong3000/paddle.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$paddle_8h.html",tooltip=" "];
+  Node2 -> Node3 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node3 [label="/media/dane/Politechnika\l/WDS/Pong3000/ball.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ball_8h.html",tooltip=" "];
+  Node3 -> Node4 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node4 [label="/media/dane/Politechnika\l/WDS/Pong3000/ball.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$ball_8cpp.html",tooltip=" "];
+  Node3 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node5 [label="/media/dane/Politechnika\l/WDS/Pong3000/game.h",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$game_8h.html",tooltip=" "];
+  Node5 -> Node6 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node6 [label="/media/dane/Politechnika\l/WDS/Pong3000/game.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$game_8cpp.html",tooltip=" "];
+  Node5 -> Node7 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node7 [label="/media/dane/Politechnika\l/WDS/Pong3000/mainwindow.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$mainwindow_8cpp.html",tooltip=" "];
+  Node2 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node2 -> Node8 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node8 [label="/media/dane/Politechnika\l/WDS/Pong3000/paddle.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$paddle_8cpp.html",tooltip=" "];
+  Node1 -> Node5 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node1 -> Node9 [dir="back",color="midnightblue",fontsize="10",style="solid",fontname="Helvetica"];
+  Node9 [label="/media/dane/Politechnika\l/WDS/Pong3000/score.cpp",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$score_8cpp.html",tooltip=" "];
+}

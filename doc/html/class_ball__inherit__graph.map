@@ -1,0 +1,5 @@
+<map id="Ball" name="Ball">
+<area shape="rect" id="node1" title="Klasa przedstawiająca piłkę" alt="" coords="87,80,131,107"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,5,76,32"/>
+<area shape="rect" id="node3" title=" " alt="" coords="101,5,255,32"/>
+</map>

@@ -1,0 +1,10 @@
+<map id="Game::Game" name="Game::Game">
+<area shape="rect" id="node1" title="Konstruktor klasy Game." alt="" coords="5,56,105,83"/>
+<area shape="rect" id="node2" href="$class_ball.html#ac9355954261803dae69ec12a58a61845" title="funkcja resetująca położenie piłki" alt="" coords="353,56,500,83"/>
+<area shape="rect" id="node3" href="$class_game.html#a8a16b126bde27029dd2f316caf2f1276" title="Porusza paletką bota." alt="" coords="153,5,305,32"/>
+<area shape="rect" id="node5" href="$class_game.html#a4a54feb70f4a34f1cc02832f98fad7a3" title="Resetuje położenie piłki i nalicza punkty." alt="" coords="171,107,287,133"/>
+<area shape="rect" id="node4" href="$class_paddle.html#a7ab458c5003670364e604aeae1996821" title="przenosi paletkę o wskazaną odległość od obecnego miejsca" alt="" coords="353,5,500,32"/>
+<area shape="rect" id="node6" href="$class_score.html#a0b481b4e3963090980301b2dbe2c3f95" title="zwraca obecny wynik punktowy" alt="" coords="369,208,485,235"/>
+<area shape="rect" id="node7" href="$class_score.html#ab5dbfab6935903c075509546878cfbda" title="zwiększa wartość przechowywanego licznika o 1" alt="" coords="370,107,483,133"/>
+<area shape="rect" id="node8" href="$class_score.html#ade936f4b478e9b5b5188e5232b6f1a0f" title="ustawia ilość punktów na 0" alt="" coords="363,157,490,184"/>
+</map>

@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/sounds">
+        <file>Wii_sports.mp3</file>
+        <file>tennis.wav</file>
+    </qresource>
+    <qresource prefix="/graphics">
+        <file>003-robot.png</file>
+        <file>002-user.png</file>
+        <file>004-tennis-ball.png</file>
+    </qresource>
+</RCC>
