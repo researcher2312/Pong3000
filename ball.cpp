@@ -11,7 +11,7 @@ int getRandomSign()
 }
 Ball::Ball()
 {
-    setRect(0,0,25,25);
+    setPixmap(QPixmap(":/graphics/004-tennis-ball.png").scaledToHeight(30));
     timer = new QTimer(this);
     connect(timer, SIGNAL(timeout()), this, SLOT(move()));
     timer->start(25);
@@ -24,16 +24,16 @@ void Ball::move()
         QSound::play(":/sounds/tennis.wav");
     }
     setPos(x()+speed_x, y()+speed_y);
-
+    setRotation(rotation()+1);
 }
 
 bool Ball::detectWallCollision()
 {
-    if(y() <= 0 || y() >= scene()->height()-rect().height()){
+    if(y() <= 0 || y() >= scene()->height()- pixmap().height()){
         speed_y = -speed_y;
         return true;
     }
-    if(x() <= 0 || x() >= scene()->width()-rect().width()){
+    if(x() <= 0 || x() >= scene()->width()-pixmap().width()){
         emit ballOut();
         return true;
     }

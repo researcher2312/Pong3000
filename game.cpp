@@ -4,7 +4,7 @@
 #include "game.h"
 
 
-constexpr int POINTS_ENDING_ROUND= 2;
+constexpr int POINTS_ENDING_ROUND= 11;
 
 Game::Game(bool isPlayedWithComputer, int difficulty_level, QWidget* parent)
     :QGraphicsView(parent), isPlayedWithComputer(isPlayedWithComputer), difficulty_level(difficulty_level)
@@ -39,11 +39,11 @@ Game::Game(bool isPlayedWithComputer, int difficulty_level, QWidget* parent)
 
 void Game::setPlayersNames(QString name1, QString name2)
 {
-        label[0]->setFont(QFont("bitwise", 25));
+        label[0]->setFont(QFont("continuum bold", 25));
         label[0]->setText(name1);
         label[0]->setPos(0, 20);
 
-        label[1]->setFont(QFont("bitwise", 25));
+        label[1]->setFont(QFont("continuum bold", 25));
         label[1]->setText(name2);
         label[1]->setPos(750, 10);
 }
@@ -81,6 +81,7 @@ void Game::resetBall()
             msgBox.setText("Koniec gry");
             msgBox.exec();
             delete this;
+            return;
         }
         QMessageBox msgBox;
         score1->resetScore();
@@ -125,7 +126,7 @@ void USBPlayedGame::movePlayers(QVector<int> move)
 
 void Game::moveBotPlayer()
 {
-    int difference = player2->y() - ball->y();
+    int difference = player2->y() - ball->y() + 75;
     player2->moveRelative(-getSign(difference) * difficulty_level);
 
 }

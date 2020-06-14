@@ -7,7 +7,7 @@
 Score::Score(int x, int y, QGraphicsItem* parent):
     QGraphicsSimpleTextItem(parent)
 {
-    setFont(QFont("bitwise", 25));
+    setFont(QFont("Continuum bold", 25));
     setPos(x, y);
     update();
 }

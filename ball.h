@@ -18,13 +18,8 @@ private:
     bool detectPaddleColision();
     void initRandomSpeed();
     void initRandomCoords();
-public:
-    Ball();
-    void initRandomStart();
-public slots:
+private slots:
     void move();
-signals:
-    void ballOut();
 };
 
 #endif // BALL_H
