@@ -1,6 +1,7 @@
 #include <QGraphicsScene>
 #include <QSerialPortInfo>
 #include <QChartView>
+#include <QMediaPlayer>
 
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
@@ -14,6 +15,9 @@ MainWindow::MainWindow(QWidget *parent)
     device = new SerialConnector(this);
     ui->setupUi(this);
     ui->comboBoxDevices->clear();
+    QMediaPlayer* music = new QMediaPlayer(this);
+    music->setMedia(QUrl("qrc:/sounds/Wii_sports.mp3"));
+    music->play();
 }
 
 MainWindow::~MainWindow()

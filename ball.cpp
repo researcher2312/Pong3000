@@ -2,6 +2,7 @@
 #include <QDebug>
 #include <QList>
 #include <QRandomGenerator>
+#include <QSound>
 #include "ball.h"
 
 int getRandomSign()
@@ -19,7 +20,9 @@ Ball::Ball()
 void Ball::move()
 {
     detectWallCollision();
-    detectPaddleColision();
+    if (detectPaddleColision()){
+        QSound::play(":/sounds/tennis.wav");
+    }
     setPos(x()+speed_x, y()+speed_y);
 
 }
